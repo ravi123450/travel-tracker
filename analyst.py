@@ -6,6 +6,7 @@ from functools import wraps
 import jwt
 import datetime
 import numpy as np
+from datetime import datetime, timedelta
 
 from models import db, User, Trip
 
@@ -55,7 +56,7 @@ def analyst_login():
 
         token = jwt.encode({
             "role": "analyst",
-            "exp": datetime.datetime.utcnow() + datetime.timedelta(hours=8)
+            "exp": datetime.utcnow() + timedelta(hours=8)
         }, current_app.config["SECRET_KEY"], algorithm="HS256")
 
         return jsonify({"token": token})
